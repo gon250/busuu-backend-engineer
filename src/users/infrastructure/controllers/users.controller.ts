@@ -1,25 +1,14 @@
-import { Controller } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
+import { CommandBus } from "@nestjs/cqrs";
+
+import { CreateUserCommand } from "../../application/command/create-user.command";
 
 @Controller("users")
 export class UsersController {
-    constructor() {}
+    constructor(private readonly commandBus: CommandBus) {}
 
-    // @Get()
-    // getAll() {
-    //     return this.usersService.findAll();
-    // }
-    //
-    // @Post()
-    // create(@Body() body) {
-    //     return this.usersService.create(body.name);
-    // }
+    @Post()
+    create(@Body() body) {
+        this.commandBus.execute(new CreateUserCommand(body.name));
+    }
 }
-
-/**
- * Reglas de negocio
- * Control de errores
- * Test
- * Optional: Validaciones.
- *
- * Docker: Run node
- */
