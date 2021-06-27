@@ -1,6 +1,10 @@
+/**
+ * This class should be placed at infrastructure level, but because speed
+ * Im using this as my entity.
+ */
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-import { Exercise } from "../../exercises/entities/exercise.entity";
+import { Exercise } from "../../../exercises/domain/entities/exercise.orm-entity";
 
 @Entity({ name: "users" })
 export class User {

@@ -1,16 +1,17 @@
 import { Module } from "@nestjs/common";
+import { CqrsModule } from "@nestjs/cqrs";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { ExercisesController } from "./controllers/exercises.controller";
-import { ExercisesService } from "./services/exercises.service";
-import { Exercise } from "./entities/exercise.entity";
-import { User } from "../users/entities/users.entity";
-import { UsersService } from "../users/services/users.service";
+import { ExercisesController } from "./infrastructure/controllers/exercises.controller";
+import { Exercise } from "./domain/entities/exercise.orm-entity";
+import { User } from "../users/domain/entities/users.orm-entity";
+import { CreateExerciseCommandHandler } from "./application/commad/create-exercise-command.handler";
+import { FindAllExercisesQueryHandler } from "./application/query/find-all-exercises-query.handler";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Exercise, User])],
+    imports: [CqrsModule, TypeOrmModule.forFeature([Exercise, User])],
     controllers: [ExercisesController],
-    providers: [ExercisesService, UsersService],
-    exports: [ExercisesService]
+    providers: [CreateExerciseCommandHandler, FindAllExercisesQueryHandler],
+    exports: []
 })
 export class ExercisesModule {}
