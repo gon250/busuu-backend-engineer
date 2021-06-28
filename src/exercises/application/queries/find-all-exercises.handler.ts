@@ -15,7 +15,7 @@ export class FindAllExercisesHandler
         private repository: Repository<Exercise>
     ) {}
 
-    async execute(query: FindAllExercisesQuery) {
+    async execute(query: FindAllExercisesQuery): Promise<ExerciseView[]> {
         return this.repository.find({ relations: ["user"] }).then((res) => {
             return res.map(
                 (exercise) =>

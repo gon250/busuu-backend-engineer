@@ -11,6 +11,7 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { CreateExerciseCommand } from "../../application/commads/create-exercise.command";
 import { FindAllExercisesQuery } from "../../application/queries/find-all-exercises.query";
 import { CreateExerciseBody } from "../dto/create-exercise.body";
+import { ExerciseView } from "../../application/queries/exercise.view";
 
 @Controller("exercises")
 export class ExercisesController {
@@ -21,7 +22,7 @@ export class ExercisesController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    public getAll() {
+    public getAll(): Promise<ExerciseView[]> {
         return this.queryBus.execute(new FindAllExercisesQuery());
     }
 
