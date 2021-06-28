@@ -8,8 +8,9 @@ import {
 } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 
-import { CreateExerciseCommand } from "../../application/commad/create-exercise.command";
-import { FindAllExercisesQuery } from "../../application/query/find-all-exercises.query";
+import { CreateExerciseCommand } from "../../application/commads/create-exercise.command";
+import { FindAllExercisesQuery } from "../../application/queries/find-all-exercises.query";
+import { CreateExerciseBody } from "../dto/create-exercise.body";
 
 @Controller("exercises")
 export class ExercisesController {
@@ -20,14 +21,13 @@ export class ExercisesController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    getAll() {
+    public getAll() {
         return this.queryBus.execute(new FindAllExercisesQuery());
     }
 
-    // TODO: Implement auth.
     @Post()
-    create(@Body() body) {
-        this.commandBus.execute(
+    public async create(@Body() body: CreateExerciseBody): Promise<void> {
+        await this.commandBus.execute(
             new CreateExerciseCommand(body.userId, body.content)
         );
     }

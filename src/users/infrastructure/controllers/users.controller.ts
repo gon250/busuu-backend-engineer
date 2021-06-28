@@ -1,14 +1,16 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 
-import { CreateUserCommand } from "../../application/command/create-user.command";
+import { CreateUserCommand } from "../../application/commands/create-user.command";
+import { CreateUserBody } from "../dto/create-user.body";
 
 @Controller("users")
 export class UsersController {
     constructor(private readonly commandBus: CommandBus) {}
 
     @Post()
-    create(@Body() body) {
-        this.commandBus.execute(new CreateUserCommand(body.name));
+    public async create(@Body() body: CreateUserBody): Promise<void> {
+        const { name } = body;
+        await this.commandBus.execute(new CreateUserCommand(name));
     }
 }

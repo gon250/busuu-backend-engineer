@@ -7,7 +7,7 @@ import { Exercise } from "../../domain/entities/exercise.orm-entity";
 import { ExerciseView } from "./exercise.view";
 
 @QueryHandler(FindAllExercisesQuery)
-export class FindAllExercisesQueryHandler
+export class FindAllExercisesHandler
     implements IQueryHandler<FindAllExercisesQuery>
 {
     constructor(
