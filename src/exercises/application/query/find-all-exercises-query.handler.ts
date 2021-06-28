@@ -15,10 +15,17 @@ export class FindAllExercisesQueryHandler
         private repository: Repository<Exercise>
     ) {}
 
-    async execute(query: FindAllExercisesQuery): Promise<ExerciseView[]> {
-        // get all Exercises by the repository
-        // Serializar a ExerciseView
-        // return this.repository.find();
-        return [];
+    async execute(query: FindAllExercisesQuery) {
+        return this.repository.find({ relations: ["user"] }).then((res) => {
+            return res.map(
+                (exercise) =>
+                    new ExerciseView(
+                        exercise.id,
+                        exercise.content,
+                        exercise.createdAt,
+                        exercise.user
+                    )
+            );
+        });
     }
 }

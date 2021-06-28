@@ -19,6 +19,7 @@ export class CreateExerciseCommandHandler implements ICommandHandler<CreateExerc
         const newExercise = new Exercise();
         newExercise.user = await this.userRepository.findOne(command.userId);
         newExercise.content = command.content;
+
         return this.exerciseRepository.save(newExercise);
     }
 }

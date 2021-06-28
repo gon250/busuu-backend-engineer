@@ -11,13 +11,6 @@ import { User } from "../../../users/domain/entities/users.orm-entity";
 
 @Entity({ name: "exercises" })
 export class Exercise {
-    constructor() {}
-
-    validate() {
-        // Validate lenght
-        // Max 10 per user.
-    }
-
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
