@@ -1,11 +1,12 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { Repository } from "typeorm";
+import { NotFoundException } from "@nestjs/common";
+import { getRepositoryToken } from "@nestjs/typeorm";
 
 import { CreateExerciseHandler } from "./create-exercise.handler";
 import { Exercise } from "../../domain/entities/exercise.orm-entity";
 import { CreateExerciseCommand } from "./create-exercise.command";
-import { NotFoundException } from "@nestjs/common";
-import { getRepositoryToken } from "@nestjs/typeorm";
+import { ExerciseContentLimitException } from "../../domain/exceptions/ExerciseContentLimitException";
 
 describe("CreateExerciseHandler", () => {
     let repository: Repository<Exercise>;
@@ -41,7 +42,17 @@ describe("CreateExerciseHandler", () => {
             ).rejects.toThrow(NotFoundException);
         });
 
-        //  it(limit 100
-        //  it(limit by user - max 10
+        it("should throw ExerciseContentLimitException when exercise length is more than 100", async () => {
+            const command = new CreateExerciseCommand(
+                "user-id",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            );
+
+            repository.find = jest.fn().mockResolvedValue(undefined);
+
+            await expect(
+                createExerciseHandler.execute(command)
+            ).rejects.toThrow(ExerciseContentLimitException);
+        });
     });
 });
