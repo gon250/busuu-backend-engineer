@@ -1,5 +1,11 @@
-## Description
-Busuu Backend Engineer Test (NodeJS)
+## Busuu Backend Engineer Test (NodeJS)
+
+The main goal is create a new project with two API endpoints.
+- Get all Exercises
+- Create an Exercise
+
+The implementation I have done is more complex that it needs to be considering the main goal, however
+this is how I would setup a new project thinking on the excitability.
 
 ## Setup
 ### Requirements
@@ -16,6 +22,8 @@ $ npm install
 $ docker-compose up
 
 $ npm run start
+
+$ npm run migrations:run
 ```
 
 App running in [http://localhost:3000](http://localhost:3000/)
