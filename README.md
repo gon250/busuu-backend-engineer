@@ -20,6 +20,9 @@ $ npm install
 ### Running the app
 ```bash
 $ make start
+
+# Onl first time
+$ npm run migrations:run
 ```
 
 App running in [http://localhost:3000](http://localhost:3000/)
