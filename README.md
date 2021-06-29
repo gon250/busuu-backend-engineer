@@ -42,10 +42,10 @@ App running in [http://localhost:3000](http://localhost:3000/)
 - There is coupling in the entities at the domain level 🤮, which is wrong. 
   The correct thing to do would be to have an implementation at the infrastructure level 
   and avoid the coupling at domain level.
-- I added a test file for the use-case create exercise. I had some problems mocking the repository, 
-  but I left the test implemented as it should, with the mention that with more time I would create
+- I added a test file for the use-case to create an exercise. I had some problems mocking the repository, 
+  but I left the test implemented as it should, with the mention that with more time I would create a
   different implementation for that.
-- Created some custom exception at domain level. I could create more and with more details.
+- Created some custom exceptions at domain level. I could create more and with more details.
 - Using class-validator to validate body requests (Not domain rules).
 
 ## Stay in touch
