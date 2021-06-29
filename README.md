@@ -23,7 +23,7 @@ $ docker-compose up
 
 $ npm run start
 
-$ npmp run migrations:run
+$ npm run migrations:run
 ```
 
 App running in [http://localhost:3000](http://localhost:3000/)
