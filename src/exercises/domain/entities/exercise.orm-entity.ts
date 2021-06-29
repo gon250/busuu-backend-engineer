@@ -38,6 +38,17 @@ export class Exercise {
     })
     createdAt: Date;
 
+    static create(user: User, content: string) {
+        const exercise = new Exercise();
+        exercise.user = user;
+        exercise.content = content;
+        this.validate(exercise.user, exercise.content);
+
+        // this.event.push(new UserCreatedEvent)...
+
+        return exercise;
+    }
+
     static validate(user: User, content: string) {
         if (content.length > 100) {
             throw new ExerciseContentLimitException(

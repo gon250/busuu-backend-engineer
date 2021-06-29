@@ -19,11 +19,7 @@ $ npm install
 
 ### Running the app
 ```bash
-$ docker-compose up
-
-$ npm run start
-
-$ npm run migrations:run
+$ make start
 ```
 
 App running in [http://localhost:3000](http://localhost:3000/)

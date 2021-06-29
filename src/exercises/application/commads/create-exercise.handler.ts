@@ -22,16 +22,13 @@ export class CreateExerciseHandler
             .findOne(command.userId, {
                 relations: ["exercises"]
             })
-            .catch((e) => {
+            .catch(() => {
                 throw new NotFoundException();
             });
 
-        await Exercise.validate(currentUser, command.content);
-
-        const newExercise = new Exercise();
-        newExercise.user = currentUser;
-        newExercise.content = command.content;
+        const newExercise = await Exercise.create(currentUser, command.content);
 
         await this.exerciseRepository.save(newExercise);
+        // eventBus.publish(newExercise.event)
     }
 }

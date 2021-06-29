@@ -29,4 +29,10 @@ export class User {
         }
         return null;
     }
+
+    static create(name: string) {
+        const newUser = new User();
+        newUser.name = name;
+        return name;
+    }
 }

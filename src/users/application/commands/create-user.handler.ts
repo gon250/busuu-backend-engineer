@@ -6,18 +6,14 @@ import { Repository } from "typeorm";
 import { User } from "../../domain/entities/users.orm-entity";
 
 @CommandHandler(CreateUserCommand)
-export class CreateUserHandler
-    implements ICommandHandler<CreateUserCommand>
-{
+export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
     constructor(
         @InjectRepository(User)
-        private userRepository: Repository<User>
+        private repository: Repository<User>
     ) {}
 
-    // TODO: Set proper type.
-    execute(command: CreateUserCommand): Promise<any> {
-        const newUser = new User();
-        newUser.name = command.name;
-        return this.userRepository.save(newUser);
+    async execute(command: CreateUserCommand): Promise<void> {
+        const newUser = this.repository.create(command);
+        await this.repository.save(newUser);
     }
 }
