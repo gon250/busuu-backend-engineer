@@ -28,8 +28,12 @@ export class ExercisesController {
 
     @Post()
     public async create(@Body() body: CreateExerciseBody): Promise<void> {
-        await this.commandBus.execute(
-            new CreateExerciseCommand(body.userId, body.content)
-        );
+        try {
+            await this.commandBus.execute(
+                new CreateExerciseCommand(body.userId, body.content)
+            );
+        } catch (e) {
+            throw e;
+        }
     }
 }
