@@ -5,7 +5,7 @@ The main goal is create a new project with two API endpoints.
 - Create an Exercise
 
 The implementation I have done is more complex that it needs to be considering the main goal, however
-this is how I would setup a new project thinking on the excitability.
+this is how I would setup a new project thinking on the scalability.
 
 ## Setup
 ### Requirements
