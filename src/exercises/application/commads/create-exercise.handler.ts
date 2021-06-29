@@ -8,17 +8,23 @@ import { CreateExerciseCommand } from "./create-exercise.command";
 import { User } from "../../../users/domain/entities/users.orm-entity";
 
 @CommandHandler(CreateExerciseCommand)
-export class CreateExerciseHandler implements ICommandHandler<CreateExerciseCommand> {
+export class CreateExerciseHandler
+    implements ICommandHandler<CreateExerciseCommand>
+{
     constructor(
-        @InjectRepository(Exercise) private exerciseRepository: Repository<Exercise>,
+        @InjectRepository(Exercise)
+        private exerciseRepository: Repository<Exercise>,
         @InjectRepository(User) private userRepository: Repository<User>
     ) {}
 
     async execute(command: CreateExerciseCommand): Promise<void> {
-        const currentUser = await this.userRepository.findOne(command.userId, {
-            relations: ["exercises"]
-        });
-        if (!currentUser) throw new NotFoundException();
+        const currentUser = await this.userRepository
+            .findOne(command.userId, {
+                relations: ["exercises"]
+            })
+            .catch((e) => {
+                throw new NotFoundException();
+            });
 
         await Exercise.validate(currentUser, command.content);
 
