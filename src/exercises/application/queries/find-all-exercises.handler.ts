@@ -7,7 +7,7 @@ import { Exercise } from "../../domain/entities/exercise.orm-entity";
 import { ExerciseView } from "./exercise.view";
 
 @QueryHandler(FindAllExercisesQuery)
-export class FindAllExercisesQueryHandler
+export class FindAllExercisesHandler
     implements IQueryHandler<FindAllExercisesQuery>
 {
     constructor(
@@ -15,7 +15,7 @@ export class FindAllExercisesQueryHandler
         private repository: Repository<Exercise>
     ) {}
 
-    async execute(query: FindAllExercisesQuery) {
+    async execute(query: FindAllExercisesQuery): Promise<ExerciseView[]> {
         return this.repository.find({ relations: ["user"] }).then((res) => {
             return res.map(
                 (exercise) =>

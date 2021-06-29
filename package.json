@@ -1,15 +1,15 @@
 {
    "name": "busuu-test",
    "version": "0.0.1",
-   "description": "",
-   "author": "",
+   "description": "Busu-test",
+   "author": "Gonzalo Barba Lopez",
    "private": true,
    "license": "UNLICENSED",
    "scripts": {
       "prebuild": "rimraf dist",
       "build": "nest build",
       "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-      "start": "nest start",
+      "start": "npm run typeorm -- migration:run && nest start",
       "start:dev": "nest start --watch",
       "start:debug": "nest start --debug --watch",
       "start:prod": "node dist/main",

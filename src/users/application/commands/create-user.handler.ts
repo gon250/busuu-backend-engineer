@@ -6,7 +6,7 @@ import { Repository } from "typeorm";
 import { User } from "../../domain/entities/users.orm-entity";
 
 @CommandHandler(CreateUserCommand)
-export class CreateUserCommandHandler
+export class CreateUserHandler
     implements ICommandHandler<CreateUserCommand>
 {
     constructor(
