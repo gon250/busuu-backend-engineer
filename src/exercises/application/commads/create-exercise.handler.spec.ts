@@ -40,5 +40,8 @@ describe("CreateExerciseHandler", () => {
                 createExerciseHandler.execute(command)
             ).rejects.toThrow(NotFoundException);
         });
+
+        //  it(limit 100
+        //  it(limit by user - max 10
     });
 });

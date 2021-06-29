@@ -8,12 +8,9 @@ import { CreateExerciseCommand } from "./create-exercise.command";
 import { User } from "../../../users/domain/entities/users.orm-entity";
 
 @CommandHandler(CreateExerciseCommand)
-export class CreateExerciseHandler
-    implements ICommandHandler<CreateExerciseCommand>
-{
+export class CreateExerciseHandler implements ICommandHandler<CreateExerciseCommand> {
     constructor(
-        @InjectRepository(Exercise)
-        private exerciseRepository: Repository<Exercise>,
+        @InjectRepository(Exercise) private exerciseRepository: Repository<Exercise>,
         @InjectRepository(User) private userRepository: Repository<User>
     ) {}
 

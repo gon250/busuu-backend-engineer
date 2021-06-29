@@ -14,9 +14,10 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn
 } from "typeorm";
-import { BadRequestException } from "@nestjs/common";
 
 import { User } from "../../../users/domain/entities/users.orm-entity";
+import { ExerciseContentLimitException } from "../exceptions/ExerciseContentLimitException";
+import { ExerciseByUserLimitException } from "../exceptions/ExerciseByUserLimitException";
 
 @Entity({ name: "exercises" })
 export class Exercise {
@@ -39,11 +40,15 @@ export class Exercise {
 
     static validate(user: User, content: string) {
         if (content.length > 100) {
-            throw new BadRequestException("Content must be shorter than or equal to 100 characters");
+            throw new ExerciseContentLimitException(
+                "Content must be shorter than or equal to 100 characters"
+            );
         }
 
         if (user.exercisesAmount > 10) {
-            throw new BadRequestException("User cannot have more than 10 exercises");
+            throw new ExerciseByUserLimitException(
+                "User cannot have more than 10 exercises"
+            );
         }
     }
 }
